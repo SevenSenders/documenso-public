@@ -28,7 +28,7 @@
     "@simplewebauthn/server": "^9.0.3",
     "colord": "^2.9.3",
     "cookie-es": "^1.0.0",
-    "formidable": "^2.1.1",
+    "formidable": "^3.5.4",
     "framer-motion": "^10.12.8",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.279.0",

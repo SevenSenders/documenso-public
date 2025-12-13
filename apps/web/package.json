@@ -34,7 +34,7 @@
     "lucide-react": "^0.279.0",
     "luxon": "^3.4.0",
     "micro": "^10.0.1",
-    "next": "14.2.6",
+    "next": "14.2.35",
     "next-auth": "4.24.5",
     "next-axiom": "^1.5.1",
     "next-plausible": "^3.10.1",

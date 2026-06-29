@@ -1,0 +1,69 @@
+'use client';
+
+import type { HTMLAttributes } from 'react';
+import { useState } from 'react';
+
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
+import { downloadPDF } from '@documenso/lib/client-only/download-pdf';
+import type { DocumentData } from '@documenso/prisma/client';
+import { useToast } from '@documenso/ui/primitives/use-toast';
+
+import { Button } from '../../primitives/button';
+
+export type DownloadButtonProps = HTMLAttributes<HTMLButtonElement> & {
+  disabled?: boolean;
+  fileName?: string;
+  documentData?: DocumentData;
+};
+
+export const DocumentDownloadButton = ({
+  className,
+  fileName,
+  documentData,
+  disabled,
+  ...props
+}: DownloadButtonProps) => {
+  const { _ } = useLingui();
+  const { toast } = useToast();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onDownloadClick = async () => {
+    try {
+      setIsLoading(true);
+
+      if (!documentData) {
+        setIsLoading(false);
+        return;
+      }
+
+      await downloadPDF({ documentData, fileName }).then(() => {
+        setIsLoading(false);
+      });
+    } catch (err) {
+      setIsLoading(false);
+
+      toast({
+        title: _('Something went wrong'),
+        description: _('An error occurred while downloading your document.'),
+        variant: 'destructive',
+      });
+    }
+  };
+
+  return (
+    <Button
+      type="button"
+      variant="default"
+      className={className}
+      disabled={disabled || !documentData}
+      onClick={onDownloadClick}
+      loading={isLoading}
+      {...props}
+    >
+      <Trans>Download</Trans>
+    </Button>
+  );
+};

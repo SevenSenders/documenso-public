@@ -1,0 +1,34 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: documenso
+  title: Documenso
+  annotations:
+    github.com/project-slug: SevenSenders/documenso
+    github.com/team-slug: SevenSenders/teams/claims-developers
+  tags:
+    - external
+    - open-source
+spec:
+  type: service
+  lifecycle: production
+  owner: claims-developers
+  providesApis:
+    - documenso
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: documenso
+spec:
+  type: openapi
+  lifecycle: production
+  owner: claims-developers
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Documenso
+      version: 1.0.0
+      description: https://sign.claim.me/api/v1/openapi
+    paths: {}
